@@ -10,8 +10,8 @@
         <IsPackable>false</IsPackable>
         <Copyright>Copyright © Kobayashi-Maid 2024</Copyright>
         <Company>Kobayashi-Maid</Company>
-        <AssemblyVersion>0.1.0</AssemblyVersion>
-        <FileVersion>0.1.0</FileVersion>
+        <AssemblyVersion>0.1.1</AssemblyVersion>
+        <FileVersion>0.1.1</FileVersion>
         <Version>0.1.0</Version>
     </PropertyGroup>
 

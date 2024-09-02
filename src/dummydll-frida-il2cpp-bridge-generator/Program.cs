@@ -9,11 +9,12 @@ class Program
     private const string ParamTypeScriptOutputDir = "--tsoutput=";
     private const string ParamAnnotation = "--annotation";
     private const string ParamHelp = "--help";
-
+    private const string ParamJsDoc = "--jsdoc";
 
     public static string? AssemblyName { get; set; }
     public static string? TypeScriptOutputDir { get; set; }
     public static bool Annotation { get; set; }
+    public static bool JsDoc { get; set; }
 
 
     [STAThread]
@@ -32,7 +33,8 @@ class Program
                 },
                 { ParamAssemblyName, value => { AssemblyName = value; } },
                 { ParamTypeScriptOutputDir, value => { TypeScriptOutputDir = value; } },
-                { ParamAnnotation, _ => { Annotation = true; } }
+                { ParamAnnotation, _ => { Annotation = true; } },
+                { ParamJsDoc, _ => { JsDoc = true; } }
             };
 
             foreach (var arg in args)
@@ -88,6 +90,7 @@ class Program
         Console.WriteLine(format, "--tsoutput=<file path>",
             "[Required] Path to the directory where the generated TypeScript files will be saved.");
         Console.WriteLine(format, "--annotation", "Generate TypeScript annotations for the generated classes.");
+        Console.WriteLine(format, "--jsdoc", "Generate JSDoc comments for the generated classes.");
         Console.WriteLine(format, "--help", "Print this help message.");
     }
 
@@ -130,7 +133,7 @@ class Program
             StringBuilder tsScript;
             using (new TimingCookie("Generating frida-il2cpp-bridge classes"))
             {
-                tsScript = AssemblyToFridaIl2CppBridgeClasses.Generate(assembly, Annotation);
+                tsScript = AssemblyToFridaIl2CppBridgeClasses.Generate(assembly, Annotation, JsDoc);
             }
 
             using (new TimingCookie("Writing frida-il2cpp-bridge classes to file"))
